@@ -1,0 +1,30 @@
+language: objective-c
+cache: cocoapods
+
+env:
+  global:
+    - IOS_DEV_EMAIL=mail@example.com
+    # IOS_DEV_PASSWORD
+    - secure: "IOS_DEV_PASSWORD=A"
+    - IOS_DEV_CERT_NAME=CERT_NAME
+    # IOS_SECRET_KEY_ENCRYPTED_TOKEN
+    - secure: "IOS_SECRET_KEY_ENCRYPTED_TOKEN=A"
+    # IOS_SECRET_KEY_PASSWORD
+    - secure: "IOS_SECRET_KEY_PASSWORD=A"
+    - DEPLOYGATE_USER_NAME=bitcellar_devices
+    # DEPLOYGATE_API_TOKEN
+    - secure: "DEPLOYGATE_API_TOKEN=A"
+    - WORKSPACE_NAME=travis-ci-ios-sample
+    - SCHEME=travis-ci-ios-sample
+
+#before_install:
+#  - gem install cupertino shenzhen --no-ri --no-rdoc
+script: ./scripts/travis-pullrequest.sh
+after_success:
+  - rake travis:post_process
+
+branches:
+  only:
+    - master
+    - develop
+
