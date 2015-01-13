@@ -14,11 +14,12 @@ env:
     - DEPLOYGATE_USER_NAME=bitcellar_devices
     # DEPLOYGATE_API_TOKEN
     - secure: "DEPLOYGATE_API_TOKEN=A"
-    - WORKSPACE_NAME=travis-ci-ios-sample
+    - WORKSPACE_NAME=travis-ci-ios-sample.xcworkspace
     - SCHEME=travis-ci-ios-sample
 
-#before_install:
-#  - gem install cupertino shenzhen --no-ri --no-rdoc
+before_install:
+  #- gem install cupertino shenzhen --no-ri --no-rdoc
+  - pod install
 script: ./scripts/travis-pullrequest.sh
 after_success:
   - rake travis:post_process
@@ -27,4 +28,3 @@ branches:
   only:
     - master
     - develop
-
